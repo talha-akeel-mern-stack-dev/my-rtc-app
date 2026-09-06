@@ -1,8 +1,24 @@
 import express from "express";
 import "dotenv/config";
+import { connectDB } from "./lib/db.js";
+import { clerkMiddleware } from "@clerk/express";
+import cors from "cors";
 
 const app = express();
 
 const PORT = process.env.PORT;
+const CLIENT_URL = process.env.CLIENT_URL;
 
-app.listen(PORT, () => console.log(`Server is running on PORT:${PORT}`));
+// Middlewares
+app.use(express.json());
+app.use(cors({origin:CLIENT_URL, credentials:true}));
+app.use(clerkMiddleware());
+
+app.get("/test", (req, res)=>{
+    res.status(200).json({ok:true});
+});
+
+app.listen(PORT, () => {
+    connectDB();
+    console.log(`Server is running on PORT:${PORT}`);
+});
