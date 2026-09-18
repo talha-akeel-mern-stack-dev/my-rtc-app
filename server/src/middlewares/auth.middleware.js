@@ -4,11 +4,18 @@ import User from "../models/user.model.js";
 export async function protectRoute(req, res, next) {
     try {
         const { userId } = getAuth(req);
+        console.log(getAuth(req));
         
         if(!userId){
             res.status(401).json({message: "Unauthorized"});
+            console.log(userId);
+            console.log("hi");
+            
             return;
         }
+
+        console.log(userId);
+        
 
         const user = await User.findOne({ clerkId: userId });
 
