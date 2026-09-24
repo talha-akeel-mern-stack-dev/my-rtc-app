@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "shx rm -rf dist && shx cp -R src dist",
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
+    "build": "node init && shx rm -rf dist && shx cp -R src dist",
+    "dev": "node init && nodemon src/server.js",
+    "start": "node init && node src/server.js",
     "db:seed": "node src/seeds/user.seed.js"
   },
   "keywords": [],
